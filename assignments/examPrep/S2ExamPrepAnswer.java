@@ -5,11 +5,12 @@
  * 2.	Write a method that will find the largest and smallest prime in the random array.
  * 3.	Write a method to calculate the average of all the primes found in the random array.
  * 
+ * This is the mandalorian way. This is the way.
  * 
  */
 
 
-public class S2ExamPrep
+public class S2ExamPrepAnswer
 {
 	// this array is global so that you may it them in any of your methods easily
 	static int[] primes = { 2, 3, 5, 7 };
@@ -17,36 +18,58 @@ public class S2ExamPrep
 	// complete your methods here
 	public static boolean isPrime(int n)
 	{
-		// your code goes here!
+		for(int i = 0; i < primes.length; i++)
+		{
+			if(n == primes[i])
+				return true;
+		}
 		return false;
 	}
 	
 	public static int count(int[] array)
 	{
 		int counter = 0;
-		// your code goes here!
+		for(int i = 0; i < array.length; i++)
+		{
+			if(isPrime(array[i]))
+				counter++;
+		}
 		return counter;
 	}
 
 	public static int largest(int[] array)
 	{
 		int max = primes[0];  // this assumes that the primes array is sorted in ascending order, otherwise we'd have to find the smallest element in the primes array
-		// your code goes here!
+		for(int i = 0; i < array.length; i++)
+		{
+			int number = array[i];
+			if(isPrime(number) && number > max)
+				max = number;
+		}
 		return max;
 	}
 	
 	public static int smallest(int[] array)
 	{
 		int min = primes[primes.length-1];  // this assumes that the primes array is sorted in ascending order, otherwise we'd have to find the largest element in the primes array
-		// your code goes here!
+		for(int i = 0; i < array.length; i++)
+		{
+			int number = array[i];
+			if(isPrime(number) && number < min)
+				min = number;
+		}
 		return min;
 	}
 
 	public static double average(int[] array)
 	{
-		double average = 0.0;
-		// your code goes here!
-		return average;
+		double sum = 0;
+		for(int i = 0; i < array.length; i++)
+		{
+			if(isPrime(array[i]))
+				sum = sum + array[i];
+		}
+		return sum/count(array);
 	}
 
 	public static void main (String[] args)

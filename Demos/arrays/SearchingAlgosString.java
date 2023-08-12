@@ -1,7 +1,8 @@
-/*
- * Searching algos in Java
- * String version
- */
+/*****************************
+ *  Searching algos in Java  *
+ *  String version, v2.0 +r  *
+ *  mrdv 2023                *
+ *****************************/
 
 
 public class SearchingAlgosString
@@ -24,6 +25,7 @@ public class SearchingAlgosString
 		return x;
 	}
 
+	// https://www.geeksforgeeks.org/linear-search/
 	public static int linearSearch(String[] a, String key)
 	{
 		int c = 0;
@@ -41,6 +43,7 @@ public class SearchingAlgosString
 	}
 
 	// https://www.tutorialspoint.com/data_structures_algorithms/binary_search_algorithm.htm
+	// https://www.geeksforgeeks.org/binary-search/
 	public static int binarySearch(String[] array, String key)
 	{
 		int c = 0;
@@ -65,6 +68,31 @@ public class SearchingAlgosString
 		//System.out.println("Comparisons: " + c);
 		System.out.print(c);
 		return index;
+	}
+	
+	// https://www.geeksforgeeks.org/binary-search/		go to point #2
+	public static int binarySearchRecursive(String[] array, String key, int lower, int upper)
+	{
+		//System.out.println("\t\tlower index: " + lower + " upper index: " + upper + " midpoint: "+ (lower+upper)/2 );
+		if( lower <= upper )
+		{
+			int mid = (lower + upper) / 2;
+			System.out.println("\t\tL:" + lower + " U:" + upper + " M:"+ mid);
+			if( array[mid].equalsIgnoreCase(key) )
+			{	return mid; // key found, exit while loop/stop searching
+			} else if( key.compareToIgnoreCase(array[mid]) < 0 )
+			{	return binarySearchRecursive(array, key, lower, mid - 1);
+			} else if( key.compareToIgnoreCase(array[mid]) > 0 ) // this could also be a plain else
+			{	return binarySearchRecursive(array, key, mid + 1, upper);
+			}
+		}
+		return -1; // key not found
+	}
+	
+	// wrapper method to call the binarySearchRecursive(array, key, lower, upper) with less parameters
+	public static int binarySearchRecursive(String[] array, String key)
+	{
+		return binarySearchRecursive(array, key, 0, array.length-1);
 	}
 
 	// a couple of ways to visualise the insertion sort:
@@ -122,5 +150,17 @@ public class SearchingAlgosString
 			binarySearch(sorted, "zeke") );
 		System.out.println("\tbinarySearch(\"Anne\") = " +
 			binarySearch(sorted, "Anne") );
+			
+		System.out.println("\nBinary search recuersive on the sorted array:");
+		System.out.println("\tbinarySearchRecursive(\"John\") = " +
+			binarySearchRecursive(sorted, "John") );
+		System.out.println("\tbinarySearchRecursive(\"lisa\") = " +
+			binarySearchRecursive(sorted, "lisa") );
+		System.out.println("\tbinarySearchRecursive(\"kylE\") = " +
+			binarySearchRecursive(sorted, "kylE") );
+		System.out.println("\tbinarySearchRecursive(\"zeke\") = " +
+			binarySearchRecursive(sorted, "zeke") );
+		System.out.println("\tbinarySearchRecursive(\"Anne\") = " +
+			binarySearchRecursive(sorted, "Anne") );
 	}
 }
